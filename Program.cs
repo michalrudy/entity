@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MyBoards.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<MyBoardsContext>(
+    option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyBoardsConnectionsString")
+    );
 
 var app = builder.Build();
 
@@ -12,7 +20,4 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
 app.Run();
-
-aassssasa
