@@ -16,6 +16,21 @@ namespace MyBoards.Entities
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Adress> Adresses { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+  
+            modelBuilder.Entity<WorkItem>(eb =>
+                {
+                    eb.Property(x => x.State).IsRequired();
+                    eb.Property(x => x.Area).HasColumnType("varchar(200)"); 
+                    eb.Property(wi => wi.IterationPath).HasColumnName("Iteration_Path");
+                    eb.Property(wi => wi.Efford).HasColumnName("decimal(5,2");
+                    eb.Property(wi => wi.EndDate).HasPrecision(3);
+                    eb.Property(wi => wi.Activity).HasMaxLength(200);
+                    eb.Property(wi => wi.ReamaningWork).HasPrecision(14, 2);
+                });
+
+        }
 
     }
 }
